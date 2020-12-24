@@ -64,7 +64,7 @@ CONCURRENT_REQUESTS_PER_IP = 3
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'spider.pipelines.SpiderPipeline': 300,
-   'spider.pipelines.ImgPipeline': 400,
+   # 'spider.pipelines.ImgPipeline': 400,
    'spider.pipelines.SavePipeline': 500,
 }
 

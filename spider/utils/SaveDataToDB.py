@@ -20,8 +20,8 @@ def save(item):
         if res and res[0][0] > 0:
             return
 
-        sql = ("insert into work_spider (title, content, url, take_time, salary) values "
-               "('%s', '%s', '%s', '%s', '%s')" %
+        sql = ("insert into work_spider (title, content, url, take_time, salary, create_time) values "
+               "('%s', '%s', '%s', '%s', '%s', NOW())" %
                (item['title'], item['content'], item['target_url'], item['time'], item['price']))
         return sql_handler.other_sql(sql)
     finally:
