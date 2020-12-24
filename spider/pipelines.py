@@ -9,12 +9,17 @@ import scrapy
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 import json
+from concurrent.futures import ThreadPoolExecutor
+from spider.utils.SaveDataToDB import save
 
 
 class SpiderPipeline:
     def process_item(self, item, spider):
-        key_word = ['python', 'py', '爬虫', '抢购', '小程序', '项目', '数据']
+        key_word = ['python', 'py', '爬虫', '抢购', '小程序', '项目', '数据', 'vue', '网站']
         check_str = item['title'].lower()
+        if item['status'] == "已完成":
+            DropItem("==================== %s: 已完成" % check_str)
+
         if any(ext in check_str for ext in key_word):
             print("==================== %s: 包含关键词" % check_str)
             return item
@@ -34,6 +39,10 @@ class SavePipeline:
         line = json.dumps(dict(item), ensure_ascii=False) + "\n"
         # 写入文件
         self.file.write(line)
+
+        with ThreadPoolExecutor() as t:
+            t.submit(save, item)
+
         return item
 
 

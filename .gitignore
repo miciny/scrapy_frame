@@ -1,3 +1,4 @@
 .idea
 /spider/images/*
 /spider/spiders/data.json
+/spider/data.json

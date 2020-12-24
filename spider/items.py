@@ -25,3 +25,5 @@ class SpiderItem(scrapy.Item):
     icon_path = scrapy.Field()
     # 目标地址
     target_url = scrapy.Field()
+    # 状态
+    status = scrapy.Field()
