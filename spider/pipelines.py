@@ -18,10 +18,10 @@ class SpiderPipeline:
         key_word = ['python', 'py', '爬虫', '抢购', '小程序', '项目', '数据', 'vue', '网站']
         check_str = item['title'].lower()
         if "已完成" in item['status']:
-            DropItem("==================== %s: 已完成" % check_str)
+            raise DropItem("==================== %s: 已完成" % check_str)
 
         if "已重置" in item['content']:
-            DropItem("==================== %s: 已重置" % check_str)
+            raise DropItem("==================== %s: 已重置" % check_str)
 
         if any(ext in check_str for ext in key_word):
             print("==================== %s: 包含关键词" % check_str)
