@@ -45,3 +45,5 @@ class McySpider(scrapy.Spider):
             page = url[0]
             # 返回url
             yield scrapy.Request(page, callback=self.parse)
+
+        print("结束")

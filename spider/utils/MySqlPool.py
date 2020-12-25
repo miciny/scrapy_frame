@@ -41,7 +41,7 @@ class MySqlPool:
                 "database": db
             }
 
-            print("连接数据库：", db_host, db_port, db_user, db_pwd, db)
+            # print("连接数据库：", db_host, db_port, db_user, db_pwd, db)
             POOL = PooledDB(
                 pymysql,
                 t_no,                  # 连接池里的最少连接数
@@ -49,7 +49,8 @@ class MySqlPool:
             )
             MySqlPool.sql_dict[sql_key] = POOL
         else:
-            print("已连接数据库：", db_host, db)
+            pass
+            # print("已连接数据库：", db_host, db)
 
         self.sql_pool = MySqlPool.sql_dict[sql_key]
         self.conn = self.sql_pool.connection()
@@ -59,9 +60,9 @@ class MySqlPool:
     def select_sql(self, sql_str):
         try:
             self.cursor.execute(sql_str)
-            print("执行成功：", sql_str)
-            print("结果数量：", self.cursor.rowcount)
-            print("表字段名称：")
+            # print("执行成功：", sql_str)
+            # print("结果数量：", self.cursor.rowcount)
+            # print("表字段名称：")
             data_dict = list()
             for field in self.cursor.description:
                 data_dict.append(field[0])
@@ -73,28 +74,30 @@ class MySqlPool:
                         print(r)
             return rs
         except Exception as ex:
-            print("执行失败：", sql_str)
-            print("失败原因：", ex)
-            print(traceback.format_exc())
+            # print("执行失败：", sql_str)
+            # print("失败原因：", ex)
+            # print(traceback.format_exc())
             return None
         finally:
-            print("======>>>>>>\n")
+            pass
+            # print("======>>>>>>\n")
 
     # "增删改"
     def other_sql(self, sql_str):
         try:
             self.cursor.execute(sql_str)
-            print("执行成功：", sql_str)
-            print("受影响行数：", self.cursor.rowcount)
+            # print("执行成功：", sql_str)
+            # print("受影响行数：", self.cursor.rowcount)
             self.conn.commit()  # "增删改" 之后，还需要执行commit()
             return True
         except Exception as ex:
-            print("执行失败：", sql_str)
-            print("失败原因：", ex)
+            # print("执行失败：", sql_str)
+            # print("失败原因：", ex)
             self.conn.rollback()
             return False
         finally:
-            print("======>>>>>>\n")
+            pass
+            # print("======>>>>>>\n")
 
     def close_conn(self):
         self.cursor.close()
