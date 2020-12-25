@@ -1,5 +1,6 @@
 from spider.utils.MySqlPool import MySqlPool
 from concurrent.futures import ThreadPoolExecutor
+from spider import mcy_setting
 import json
 
 
@@ -24,6 +25,7 @@ def save(item):
                "('%s', '%s', '%s', '%s', '%s', NOW())" %
                (item['title'], item['content'], item['target_url'], item['time'], item['price']))
         print("保存成功：", str(item['title']))
+        mcy_setting.add_no += 1
         return sql_handler.other_sql(sql)
     finally:
         sql_handler.close_conn()

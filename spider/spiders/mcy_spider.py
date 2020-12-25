@@ -1,5 +1,6 @@
 import scrapy
 from spider.items import SpiderItem
+from spider import mcy_setting
 import copy
 
 
@@ -7,7 +8,7 @@ class McySpider(scrapy.Spider):
     name = 'mcy_spider'
     allowed_domains = ['www.yuanjisong.com']
     start_urls = ['https://www.yuanjisong.com/job']
-    times = 5
+    the_times = mcy_setting.times
 
     def parse(self, response):
         item = SpiderItem()
@@ -40,10 +41,12 @@ class McySpider(scrapy.Spider):
         # url跟进开始
         # 获取下一页的url信息
         url = response.xpath("//a[contains(text(),'下一页')]/@href").extract()
-        self.times -= 1
-        if url and self.times > 0:
+        self.the_times -= 1
+        if url and self.the_times > 0:
             page = url[0]
             # 返回url
             yield scrapy.Request(page, callback=self.parse)
 
-        print("结束")
+    # 爬虫结束时执行的函数
+    def spider_closed(self, spider):
+        print("更新数据：", mcy_setting.add_no)

@@ -11,11 +11,11 @@ from scrapy.pipelines.images import ImagesPipeline
 import json
 from concurrent.futures import ThreadPoolExecutor
 from spider.utils.SaveDataToDB import save
+from spider import mcy_setting
 
 
 class SpiderPipeline:
     def process_item(self, item, spider):
-        key_word = ['python', 'py', '爬虫', '抢购', '小程序', '项目', '数据', 'vue', '网站']
         check_str = item['title'].lower()
         if "已完成" in item['status']:
             raise DropItem("==================== %s: 已完成" % check_str)
@@ -23,7 +23,7 @@ class SpiderPipeline:
         if "已重置" in item['content']:
             raise DropItem("==================== %s: 已重置" % check_str)
 
-        if any(ext in check_str for ext in key_word):
+        if any(ext in check_str for ext in mcy_setting.key_word):
             # print("==================== %s: 包含关键词" % check_str)
             return item
         else:

@@ -66,12 +66,13 @@ class MySqlPool:
             data_dict = list()
             for field in self.cursor.description:
                 data_dict.append(field[0])
-            print(data_dict)
+            # print(data_dict)
             rs = self.cursor.fetchall()
             if self.cursor.rowcount > 0:
                 for r in rs:
                     if len(str(r)) < 500:
-                        print(r)
+                        pass
+                        # print(r)
             return rs
         except Exception as ex:
             # print("执行失败：", sql_str)
