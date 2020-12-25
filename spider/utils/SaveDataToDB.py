@@ -23,6 +23,7 @@ def save(item):
         sql = ("insert into work_spider (title, content, url, take_time, salary, create_time) values "
                "('%s', '%s', '%s', '%s', '%s', NOW())" %
                (item['title'], item['content'], item['target_url'], item['time'], item['price']))
+        print("保存成功：", str(item['title']))
         return sql_handler.other_sql(sql)
     finally:
         sql_handler.close_conn()

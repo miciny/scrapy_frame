@@ -24,7 +24,7 @@ class SpiderPipeline:
             raise DropItem("==================== %s: 已重置" % check_str)
 
         if any(ext in check_str for ext in key_word):
-            print("==================== %s: 包含关键词" % check_str)
+            # print("==================== %s: 包含关键词" % check_str)
             return item
         else:
             raise DropItem("==================== %s: 不包含关键字" % check_str)
@@ -36,8 +36,8 @@ class SavePipeline:
         self.file = open('data.json', 'w', encoding='utf-8')
 
     def process_item(self, item, spider):
-        title = item['title']
-        print("==================== 数据保存: %s" % title)
+        # title = item['title']
+        # print("==================== 数据保存: %s" % title)
         # 读取item中的数据
         line = json.dumps(dict(item), ensure_ascii=False) + "\n"
         # 写入文件
@@ -54,7 +54,7 @@ class ImgPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         # 返回Request根据图片图片url下载
         icon_url = item['icon_url']
-        print("==================== 图片下载: %s" % icon_url)
+        # print("==================== 图片下载: %s" % icon_url)
         yield scrapy.Request(icon_url)
 
     # 当下载请求完成后执行该方法
@@ -64,10 +64,10 @@ class ImgPipeline(ImagesPipeline):
         title = item['title']
         # 判断是否成功
         if not image_path:
-            print("==================== %s 图片下载失败: %s" % (title, image_path))
+            # print("==================== %s 图片下载失败: %s" % (title, image_path))
             image_path = "图片下载失败"
         # 将地址存入item
-        print("==================== %s 图片下载成功: %s" % (title, image_path))
+        # print("==================== %s 图片下载成功: %s" % (title, image_path))
         item['icon_path'] = image_path
 
         return item
