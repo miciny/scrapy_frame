@@ -48,5 +48,5 @@ class McySpider(scrapy.Spider):
             yield scrapy.Request(page, callback=self.parse)
 
     # 爬虫结束时执行的函数
-    def spider_closed(self, spider):
+    def closed(self, reason):
         print("更新数据：", mcy_setting.add_no)
