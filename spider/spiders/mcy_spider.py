@@ -1,6 +1,7 @@
 import scrapy
 from spider.items import SpiderItem
 from spider import mcy_setting
+from spider.utils.WechatServices import send_wechat_notice
 import copy
 
 
@@ -49,4 +50,6 @@ class McySpider(scrapy.Spider):
 
     # 爬虫结束时执行的函数
     def closed(self, reason):
-        print("更新数据：", mcy_setting.add_no)
+        out_str = '更新数据：%s' % mcy_setting.add_no
+        send_wechat_notice("工作检查爬虫", out_str)
+        print(out_str)
