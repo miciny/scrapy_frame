@@ -5,7 +5,8 @@ import traceback
 """
 数据库配置
 """
-mysql_ip = '39.105.72.114'
+# mysql_ip = '39.105.72.114'
+mysql_ip = '123.56.224.194'
 mysql_port = '3306'
 mysql_user = 'root'
 mysql_pw = 'Miciny219219'
