@@ -4,7 +4,7 @@ urllib3.disable_warnings()
 
 
 def send_wechat_notice(title, desc):
-    url = 'http://39.105.72.114:2205/v1/sendNotice'
+    url = 'https://www.xlovem.club/v1/sendNotice'
     para_data = {
         'title': title,
         'desc': desc
@@ -13,5 +13,5 @@ def send_wechat_notice(title, desc):
 
 
 if __name__ == '__main__':
-    res = send_wechat_notice("wo", '自己')
+    res = send_wechat_notice("测试", '新地址测试')
     print(res.text)

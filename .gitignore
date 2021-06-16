@@ -1,4 +1,5 @@
-.idea
+/.idea/
+/venv/
 /spider/images/*
 /spider/spiders/data.json
 /spider/data.json
