@@ -1,2 +1,2 @@
-cd /root/python/spider_scripts/scrapy_frame/
+cd /root/scrapy/scrapy_work/
 scrapy crawl mcy_spider
