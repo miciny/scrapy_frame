@@ -35,11 +35,11 @@ class McySpider(scrapy.Spider):
                 print(f"item['status']: {item['status']}")
 
                 item['price'] = box.xpath('.//span[@class="rixin-text-jobs font-size-8 margin-r-2"]/text()').extract()[0] + \
-                                box.xpath('.//span[@class="rixin-text-jobs font-size-8 margin-r-2"]/span/text()').extract()[0]  #
+                                box.xpath('.//span[@class="rixin-text-jobs font-size-8 margin-r-2"]/./text()').extract()[0]  #
                 print(f"item['price']: {item['price']}")
 
                 item['time'] = box.xpath('.//div[@class="consultant_title margin_top_15"]/p[2]/span[3]/text()').extract()[0] + \
-                               box.xpath('.//div[@class="consultant_title margin_top_15"]/p[2]/span[3]/span/text()').extract()[0]  #
+                               box.xpath('.//div[@class="consultant_title margin_top_15"]/p[2]/span[3]/./text()').extract()[0]  #
                 print(f"item['time']: {item['time']}")
 
             except Exception as e:
