@@ -13,19 +13,20 @@ class McySpider(scrapy.Spider):
 
     def parse(self, response):
         item = SpiderItem()
-        base_xpath = '//div[@class="weui_panel weui_panel_access weui_panel_access_adapt db_adapt margin-top-2 "]'
+        base_xpath = '//div[@class="consultant_title margin_top_15"]'
         for box in response.xpath(base_xpath):
             try:
-                item['title'] = box.xpath('.//div[@class="topic_title"]/text()').extract()[0]
-                item['content'] = box.xpath('.//p[@class="media_desc_adapt "]/text()').extract()[0]
-                item['name'] = box.xpath('.//h4[@class="weui_media_title font-color-3"]/text()').extract()[0]
-                item['icon_url'] = box.xpath('.//img[@class="weui_media_appmsg_thumb radius_img_50"]/@src').extract()[0]
-                item['target_url'] = box.xpath('.//a[1]/@href').extract()[0]
-                item['status'] = box.xpath('.//a[contains(@id, "appoint_job_")]/text()').extract()[0]
-                item['price'] = box.xpath('.//span[@class="rixin-text-jobs"]/text()').extract()[0] + \
-                                box.xpath('.//span[@class="rixin-text-jobs"]/span/text()').extract()[0]
-                item['time'] = box.xpath('.//p[@class="media_desc_adapt"]/span[3]/text()').extract()[0] + \
-                               box.xpath('.//p[@class="media_desc_adapt"]/span[3]/span/text()').extract()[0]
+                item['title'] = box.xpath('.//dd[@class="text_type_1 line_clamp_1  float_l line_height_16 "]/b/text()').extract()[0]  #
+                item['content'] = box.xpath('.//p[@class="margin_bottom_10"]/text()').extract()[0] #
+                item['name'] = box.xpath('.//a[@class="font-size-1 margin_left_1"]/span/text()').extract()[0]  #
+                item['icon_url'] = box.xpath('.//img[@class="border_radius_2 width_height_3 float_l"]/@src').extract()[0]  #
+                item['target_url'] = box.xpath('.//a[1]/@href').extract()[0]  #
+                item['status'] = box.xpath('.//a[contains(@id, "appoint_job_")]/text()').extract()[0]  #
+                item['price'] = box.xpath('.//span[@class="rixin-text-jobs font-size-8 margin-r-2"]/text()').extract()[0] + \
+                                box.xpath('.//span[@class="rixin-text-jobs font-size-8 margin-r-2"]/span/text()').extract()[0]  #
+                item['time'] = box.xpath('.//div[@class="consultant_title margin_top_15"]/p[2]/span[3]/text()').extract()[0] + \
+                               box.xpath('.//div[@class="consultant_title margin_top_15"]/p[2]/span[3]/span/text()').extract()[0]  #
+                print(f"item: {item}")
             except Exception as e:
                 print(e)
                 item['title'] = "无内容"
