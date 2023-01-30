@@ -1,2 +1,2 @@
 cd /root/scrapy/scrapy_work/
-scrapy crawl mcy_spider
+/usr/local/bin/scrapy crawl mcy_spider
